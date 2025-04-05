@@ -7,7 +7,8 @@ const Contact = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    _gotcha: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -19,30 +20,52 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot trap
+    if (formState._gotcha) {
+      // bot detected
+      return;
+    }
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormState({
-        name: '',
-        email: '',
-        message: ''
+
+    try {
+      const response = await fetch('https://formspree.io/f/xblgzewy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(formState)
       });
-      
-      // Reset submission status after 3 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 3000);
-    }, 1500);
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormState({
+          name: '',
+          email: '',
+          message: '',
+          _gotcha: ''
+        });
+
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
+      } else {
+        alert('Something went wrong! ' + (result?.error || 'Please try again.'));
+      }
+    } catch (error) {
+      alert('Error submitting form: ' + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       ref={section.ref}
       className={`py-24 bg-secondary/50 ${section.className}`}
     >
@@ -53,22 +76,22 @@ const Contact = () => {
               Get In Touch
             </div>
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Let's Connect
           </h2>
-          
+
           <p className="max-w-2xl mx-auto text-muted-foreground">
-            I'm open to collaborations, freelance work, and job opportunities. 
+            I'm open to collaborations, freelance work, and job opportunities.
             Feel free to reach out if you have any questions or want to work together.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           {/* Contact Form */}
           <div className="frosted-glass rounded-2xl p-8 shadow-lg shadow-primary/5">
             <h3 className="text-xl font-bold mb-6">Send Me a Message</h3>
-            
+
             {submitted ? (
               <div className="bg-green-50 text-green-700 rounded-lg p-4 mb-6 animate-fade-in">
                 <p className="font-medium">Thank you for your message!</p>
@@ -77,6 +100,15 @@ const Contact = () => {
             ) : (
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
+                  <input
+                    type="text"
+                    name="_gotcha"
+                    value={formState._gotcha}
+                    onChange={handleChange}
+                    className="absolute left-[-9999px]"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name
                   </label>
@@ -91,7 +123,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="mb-4">
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email
@@ -107,7 +139,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="mb-6">
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Message
@@ -123,7 +155,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -144,11 +176,11 @@ const Contact = () => {
               </form>
             )}
           </div>
-          
+
           {/* Contact Info */}
           <div>
             <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-            
+
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="bg-primary/10 rounded-full p-3 mr-4">
@@ -164,7 +196,7 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="bg-primary/10 rounded-full p-3 mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-primary">
@@ -180,7 +212,7 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="bg-primary/10 rounded-full p-3 mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-primary">
@@ -189,34 +221,34 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium mb-1">GitHub</p>
-                  <a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer" className="text-primary hover-link">
-                    github.com/yourgithub
+                  <a href="https://github.com/sagarpoudel638" target="_blank" rel="noopener noreferrer" className="text-primary hover-link">
+                    github.com/sagarpoudel638
                   </a>
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-12">
               <h3 className="text-xl font-bold mb-6">Let's Connect</h3>
               <div className="flex space-x-4">
-                <a href="#" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
+                <a href="https://www.facebook.com/sagarpoudel638" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                   </svg>
                 </a>
-                <a href="#" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
+                {/* <a href="#" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
                   </svg>
-                </a>
-                <a href="#" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
+                </a> */}
+                <a href="https://www.instagram.com/me_sagar18" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                   </svg>
                 </a>
-                <a href="#" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
+                <a href="https://linkedin.com/in/sagarpoudel638" className="bg-primary/10 rounded-full p-3 text-primary hover:bg-primary/20 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect x="2" y="9" width="4" height="12"></rect>

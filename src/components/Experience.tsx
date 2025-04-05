@@ -1,41 +1,43 @@
 
 import { useSectionAnimation, useStaggeredAnimation } from '@/lib/animations';
-
 const experiences = [
   {
     id: 1,
-    title: "Senior Full Stack Developer",
-    company: "TechCorp Solutions",
-    period: "2022 - Present",
-    description: "Built and deployed multiple microservices-based applications using MERN stack. Improved application performance by 40% through code optimization and best practices implementation.",
+    title: "Full Stack Developer",
+    company: "Dhurbatara Education Infosys",
+    period: "2023 - Present",
+    description: "Designed, developed, and currently maintain the official website for Dhurbatara Education Infosys, a professional education institute based in Nepal. The website serves as an informational and promotional platform for students preparing for government and professional exams.",
     achievements: [
-      "Led a team of 5 developers for client projects",
-      "Implemented CI/CD pipelines using GitHub Actions",
-      "Architected scalable cloud infrastructure on AWS"
+      "Built and deployed a fully responsive WordPress site at dhurbatara.edu.np",
+      "Integrated course details, notices, and updates with dynamic content",
+      "Managed domain and hosting via Amazon Lightsail",
+      "Provided ongoing updates, optimizations, and SEO improvements"
     ]
   },
   {
     id: 2,
-    title: "Full Stack Developer",
-    company: "WebFusion Innovations",
-    period: "2020 - 2022",
-    description: "Developed customer management systems in Laravel and React. Built RESTful APIs for mobile and web applications, ensuring high security and performance standards.",
+    title: "Software Developer (Training)",
+    company: "Dented Code Academy",
+    period: "Jul 2024 – Jan 2025",
+    description: "Completed a comprehensive job-ready training program focused on modern full stack development tools and practices. Participated in real-world projects under mentorship to build production-ready web applications.",
     achievements: [
-      "Optimized database queries reducing load time by 35%",
-      "Implemented responsive designs for cross-platform compatibility",
-      "Contributed to open-source projects in the Laravel ecosystem"
+      "Built React and Node.js applications with MongoDB integration",
+      "Practiced Git, Agile workflow, and REST API development",
+      "Contributed to team projects with frontend and backend collaboration",
+      "Gained hands-on experience with deployment and debugging techniques"
     ]
   },
   {
     id: 3,
-    title: "Backend Developer",
-    company: "DataSphere Technologies",
-    period: "2018 - 2020",
-    description: "Created Python-based data processing and analysis tools. Developed and maintained MySQL databases and API endpoints for client applications.",
+    title: "Academic Projects & Freelance Work",
+    company: "Freelance & University",
+    period: "2019 – 2024",
+    description: "Developed multiple projects as part of Bachelor’s and Master’s programs, including web apps, management systems, and mobile prototypes using various tech stacks.",
     achievements: [
-      "Designed efficient data processing algorithms",
-      "Created comprehensive API documentation",
-      "Implemented unit and integration tests to ensure code quality"
+      "Created a customer management system using Laravel and MySQL",
+      "Built a Bookstore Management system in Java and a Library System in Python",
+      "Developed a portfolio site using HTML, CSS, JavaScript",
+      "Explored mobile development using Flutter for Android and iOS"
     ]
   }
 ];
@@ -152,56 +154,55 @@ const Experience = () => {
         </div>
         
         <div className="mt-20 frosted-glass rounded-2xl p-8 max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center">Continuous Professional Development</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-lg font-semibold mb-3">Certifications</h4>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>AWS Certified Developer</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>MongoDB Certified Developer</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>React Advanced Patterns</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-3">Ongoing Learning</h4>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>Serverless Architecture</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>Kubernetes & Microservices</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    ✓
-                  </span>
-                  <span>Progressive Web Apps</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+  <h3 className="text-2xl font-bold mb-6 text-center">Continuous Professional Development</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Skills & Projects */}
+    <div>
+      <h4 className="text-lg font-semibold mb-3">Skills in Practice</h4> 
+      <ul className="space-y-3">
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>MERN Stack Projects (React, Node.js, MongoDB)</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Full-Stack Development Bootcamp (Dented Code Academy)</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Website Development for Dhurbatara.edu.np</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Cloud & DevOps (Hands-on with AWS & Terraform)</span>
+        </li>
+      </ul>
+    </div>
+
+    {/* Learning in Progress */}
+    <div>
+      <h4 className="text-lg font-semibold mb-3">Currently Learning</h4>
+      <ul className="space-y-3">
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Serverless Architecture (AWS Lambda, API Gateway)</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Advanced React Patterns & Performance</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Terraform for Cloud Infrastructure</span>
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 w-4 h-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">✓</span>
+          <span>Project Deployment & CI/CD Best Practices</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
       </div>
     </section>
   );
